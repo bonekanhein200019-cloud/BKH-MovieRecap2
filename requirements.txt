@@ -1,4 +1,4 @@
 flask
 edge-tts
 gunicorn
-moviepy
+moviepy==1.0.3
