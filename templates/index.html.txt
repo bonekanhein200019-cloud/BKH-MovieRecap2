@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="my" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BKH-MovieRecap - Shorten Movies, Save Time</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        sidebarBg: '#111827',
+                        cardBg: '#1f2937',
+                        primaryAccent: '#7c3aed',
+                        accentHover: '#6d28d9'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg text-gray-100 font-sans min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-sidebarBg border-r border-gray-800 flex flex-col justify-between hidden md:flex">
+        <div>
+            <!-- Logo Area -->
+            <div class="flex items-center gap-3 px-6 py-5 border-b border-gray-800">
+                <div class="bg-primaryAccent p-2 rounded-xl text-white">
+                    <i class="fa-solid fa-clapperboard text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-wide text-white">BKH-MovieRecap</h1>
+                    <span class="text-xs text-purple-400 font-medium">Pro Studio</span>
+                </div>
+            </div>
+
+            <!-- Menu Links -->
+            <nav class="px-4 py-6 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primaryAccent text-white rounded-xl font-medium transition shadow-lg shadow-purple-900/30">
+                    <i class="fa-solid fa-house"></i> ပင်မစာမျက်နှာ
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> တူးလ်များ
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition">
+                    <i class="fa-solid fa-folder-open"></i> ကျွန်ုပ်၏တိုင်းများ
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition">
+                    <i class="fa-solid fa-bookmark"></i> သိမ်းဆည်းထားေသာစရာများ
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition">
+                    <i class="fa-solid fa-gear"></i> ဆက်တင်များ
+                </a>
+            </nav>
+        </div>
+
+        <!-- Pro Plan Banner -->
+        <div class="p-4 m-4 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-500/30 rounded-2xl">
+            <div class="flex items-center gap-2 text-yellow-400 text-sm font-bold mb-1">
+                <i class="fa-solid fa-crown"></i> Pro Plan
+            </div>
+            <p class="text-xs text-gray-300 mb-3">ပိုမိုကောင်းမွန်သော အထူးအဆန်းများနှင့် အမြန်ဆုံး အသုံးပြုနိုင်ရန်။</p>
+            <button class="w-full py-2 bg-white text-gray-900 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow">
+                ယခု စာရင်းသွင်းပါ
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <!-- Top Navbar -->
+        <header class="h-16 bg-sidebarBg border-b border-gray-800 px-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <span class="text-sm font-semibold text-gray-300 hidden sm:inline">ပင်မစာမျက်နှာ</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700 text-sm cursor-pointer hover:bg-gray-700 transition">
+                    <span>🇲🇲 မြန်မာ</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
+                </div>
+                <button class="px-4 py-1.5 bg-primaryAccent hover:bg-accentHover text-white rounded-lg text-sm font-medium transition shadow">
+                    အကောင်း့ဝင်ရန်
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Body -->
+        <main class="flex-1 p-6 md:p-8 overflow-y-auto">
+            
+            <!-- Hero Banner Section -->
+            <div class="bg-gradient-to-r from-purple-900/40 via-indigo-900/30 to-cardBg border border-purple-500/20 rounded-3xl p-6 md:p-10 mb-10 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+                <div class="max-w-xl">
+                    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold mb-4 border border-purple-500/30">
+                        AI ဖြင့် Movie Recap ဖန်တီးခြင်း
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+                        Movie Recap ကို <br><span class="text-purple-400">မိမိလွယ်ကူစွာ ဖန်တီးပါ</span>
+                    </h2>
+                    <p class="text-gray-300 text-sm md:text-base mb-6">
+                        သင်ကြိုက်နှစ်သက်တဲ့ ရုပ်ရှင်/စီးရီးများကို ဆက်တင်ဖြင့် အချိန်တိုအတွင်း Recap video, AI voice, subtitle, thumbnail တို့ တစ်နေရာတည်းတွင် ဖန်တီးနိုင်ပါသည်။
+                    </p>
+                    <a href="#studio-section" class="inline-flex items-center gap-2 px-6 py-3 bg-primaryAccent hover:bg-accentHover text-white rounded-xl font-bold transition shadow-lg shadow-purple-900/40">
+                        <i class="fa-solid fa-play"></i> စတင်အသုံးပြုရန်
+                    </a>
+                </div>
+                <div class="w-full lg:w-auto bg-gray-900/80 border border-gray-700/60 p-4 rounded-2xl shadow-inner relative">
+                    <div class="absolute -top-3 -right-3 bg-primaryAccent text-white p-2 rounded-xl text-xs font-bold shadow">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio
+                    </div>
+                    <div class="bg-gray-950 rounded-xl p-4 flex flex-col gap-3 w-full sm:w-80">
+                        <div class="flex items-center justify-between text-xs text-gray-400 border-b border-gray-800 pb-2">
+                            <span>BKH-Studio v2.0</span>
+                            <span class="text-green-400 font-bold">Ready</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-microphone text-purple-400"></i>
+                            <span class="text-xs">AI အသံ: Nilar & Thiha</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-gray-900 p-2.5 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-film text-blue-400"></i>
+                            <span class="text-xs">Ratio: 16:9 / 9:16 (TikTok/YouTube)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Studio Interactive Form Section -->
+            <div id="studio-section" class="bg-cardBg border border-gray-800 rounded-3xl p-6 md:p-8 mb-10 shadow-xl">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-purple-400"></i> ဗီဒီယိုနှင့် AI အသံ တည်ဆောက်ရန် နေရာ
+                </h3>
+
+                <form id="recapForm" class="space-y-6">
+                    <!-- Video Drag & Drop Upload -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">ဗီဒီယို တင်ရန် (Drag & Drop)</label>
+                        <div id="dropZone" class="border-2 border-dashed border-gray-700 hover:border-purple-500 rounded-2xl p-8 text-center bg-gray-900/50 cursor-pointer transition">
+                            <i class="fa-solid fa-cloud-arrow-up text-4xl text-purple-400 mb-3"></i>
+                            <p class="text-sm font-medium text-gray-300">ဗီဒီယိုဖိုင်ကို ဤနေရာသို့ ဆွဲထည့်ပါ (သို့) နှိပ်၍ ရွေးချယ်ပါ</p>
+                            <p class="text-xs text-gray-500 mt-1">MP4, MKV, AVI (Max 500MB)</p>
+                            <input type="file" id="videoInput" name="video" accept="video/*" class="hidden">
+                            <span id="fileNameDisplay" class="block text-xs text-purple-400 font-bold mt-2"></span>
+                        </div>
+                    </div>
+
+                    <!-- Grid Controls -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Genre Selection -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">ဇာတ်လမ်းအမျိုးအစား (Genre)</label>
+                            <select name="genre" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                <option value="Thriller">Thriller (ရင်ခုန်စိတ်လှုပ်ရှားစရာ)</option>
+                                <option value="Horror">Horror (ကြောက်မက်ဖွယ်ရာ)</option>
+                                <option value="Action">Action (အကြမ်းစား တိုက်ပွဲ)</option>
+                                <option value="Romance">Romance (အချစ်ဇာတ်လမ်း)</option>
+                                <option value="Drama">Drama (အလွမ်းအဆွေး)</option>
+                            </select>
+                        </div>
+
+                        <!-- Voice Tone -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">အသံလေသံ (Voice Tone)</label>
+                            <select name="tone" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                <option value="Suspenseful">လျှို့ဝှက်ဆန်းကြယ် လေသံ</option>
+                                <option value="Upbeat">တက်ကြွပျော်ရွှင်သော လေသံ</option>
+                                <option value="Serious">တည်ငြိမ်လေးနက်သော လေသံ</option>
+                                <option value="Energetic">အားပါးတရ စိတ်လှုပ်ရှားသော လေသံ</option>
+                            </select>
+                        </div>
+
+                        <!-- AI Voice Model -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">AI အသံ (Voice Model)</label>
+                            <select name="voice" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                <option value="my-MM-NilarNeural">Nilar (မြန်မာ အမျိုးသမီးသံ)</option>
+                                <option value="my-MM-ThihaNeural">Thiha (မြန်မာ အမျိုးသားသံ)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Ratio & Auto Color Options -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">ဗီဒီယို အချိုးအစား (Ratio)</label>
+                            <div class="flex gap-4">
+                                <label class="flex-1 flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 p-3 rounded-xl cursor-pointer hover:border-purple-500 transition">
+                                    <input type="radio" name="ratio" value="9:16" checked class="text-purple-600 focus:ring-purple-500">
+                                    <span class="text-sm font-medium">9:16 (TikTok / Shorts)</span>
+                                </label>
+                                <label class="flex-1 flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 p-3 rounded-xl cursor-pointer hover:border-purple-500 transition">
+                                    <input type="radio" name="ratio" value="16:9" class="text-purple-600 focus:ring-purple-500">
+                                    <span class="text-sm font-medium">16:9 (YouTube)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between bg-gray-900 border border-gray-700 px-6 py-3 rounded-xl">
+                            <div>
+                                <span class="block text-sm font-semibold text-gray-200">Auto Color Grading</span>
+                                <span class="text-xs text-gray-400">ဗီဒီယို အရောင်အသွေး အလိုအလျောက် ချိန်ညှိရန်</span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="auto_color" value="true" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Textarea -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">ဇာတ်လမ်းအကျဉ်း ညွှန်ကြားချက် (Prompt)</label>
+                        <textarea name="prompt" rows="3" placeholder="ဥပမာ - ဒီဇာတ်လမ်းရဲ့ အထွတ်အထိပ် အခန်းကို စိတ်လှုပ်ရှားစရာ ဇာတ်ကြောင်းပြောပြပေးပါ..." class="w-full bg-gray-900 border border-gray-700 rounded-xl p-4 text-sm focus:outline-none focus:border-purple-500 text-gray-100"></textarea>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button type="submit" id="generateBtn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-bold text-base transition shadow-xl shadow-purple-900/50 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> ဇာတ်လမ်းဖန်တီးရန် (Generate Recap)
+                    </button>
+                </form>
+
+                <!-- Processing / Result Area -->
+                <div id="resultArea" class="hidden mt-6 p-6 bg-gray-900 border border-purple-500/40 rounded-2xl text-center">
+                    <div id="loadingSpinner" class="flex flex-col items-center justify-center py-4">
+                        <i class="fa-solid fa-spinner fa-spin text-3xl text-purple-400 mb-2"></i>
+                        <p class="text-sm font-medium text-gray-300">ဗီဒီယိုနှင့် AI အသံ ပေါင်းစပ်နေပါပြီ၊ ခဏစောင့်ပါ...</p>
+                    </div>
+                    <div id="successBox" class="hidden flex flex-col items-center justify-center py-2">
+                        <i class="fa-solid fa-circle-check text-4xl text-green-400 mb-2"></i>
+                        <p class="text-base font-bold text-white mb-3">အောင်မြင်စွာ ဖန်တီးပြီးပါပြီ!</p>
+                        <a id="downloadLink" href="#" class="px-6 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-xl text-sm font-bold transition shadow">
+                            <i class="fa-solid fa-download"></i> Recap ဗီဒီယို ဒေါင်းလုဒ်ဆွဲရန်
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Cards Grid -->
+            <h3 class="text-xl font-bold text-white mb-6">ကျွနုပ်တို့၏ တူးလ်များ</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">One Click Recap</h4>
+                    <p class="text-xs text-gray-400">ရုပ်ရှင်/စီးရီးများကို ဇာတ်လမ်းချက်ချင်းစီ Recap video ဖန်တီးပါ။</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-600/20 text-blue-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">AI အသံ</h4>
+                    <p class="text-xs text-gray-400">AI ဖြင့် မြန်မာသဘာဝကျတဲ့ အသံထွက်များကို ဖန်တီးပါ။</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-amber-600/20 text-amber-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">အသံတိုခြင်း</h4>
+                    <p class="text-xs text-gray-400">သင်လိုချင်တဲ့ အသံများကို တုပပြီး အသံအထွက်ပြုလုပ်ပါ။</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-rose-600/20 text-rose-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">ကြော်ငြာရေးစေးစနစ်</h4>
+                    <p class="text-xs text-gray-400">သင်၏ စီးပွားရေးလုပ်ငန်းအတွက် ကြော်ငြာများဖန်တီးပါ။</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">Subtitle Voice</h4>
+                    <p class="text-xs text-gray-400">Subtitle များကို AI အသံဖြင့် အလိုအလျောက် ဖန်တီးပါ။</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-cardBg border border-gray-800 hover:border-purple-500/50 transition p-6 rounded-2xl group cursor-pointer">
+                    <div class="w-12 h-12 bg-emerald-600/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">လှပ Thumbnail</h4>
+                    <p class="text-xs text-gray-400">AI ဖြင့် ဆွဲဆောင်မှုရှိသော Thumbnail များ ဖန်တီးပါ။</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="h-16 bg-sidebarBg border-t border-gray-800 px-6 flex items-center justify-between text-xs text-gray-500">
+            <span>© 2026 BKH-MovieRecap Pro. All rights reserved.</span>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-gray-300">ကိုယ်ရေးအချက်အလက်</a>
+                <a href="#" class="hover:text-gray-300">အကူအညီ</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Drag & Drop and API Handling -->
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const videoInput = document.getElementById('videoInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const recapForm = document.getElementById('recapForm');
+        const resultArea = document.getElementById('resultArea');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const successBox = document.getElementById('successBox');
+        const downloadLink = document.getElementById('downloadLink');
+
+        dropZone.addEventListener('click', () => videoInput.click());
+
+        videoInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileNameDisplay.textContent = `ရွေးချယ်ထားသောဖိုင်: ${e.target.files[0].name}`;
+            }
+        });
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-purple-500', 'bg-purple-950/20');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-purple-500', 'bg-purple-950/20');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-purple-500', 'bg-purple-950/20');
+            if (e.dataTransfer.files.length > 0) {
+                videoInput.files = e.dataTransfer.files;
+                fileNameDisplay.textContent = `ရွေးချယ်ထားသောဖိုင်: ${e.dataTransfer.files[0].name}`;
+            }
+        });
+
+        recapForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(recapForm);
+
+            resultArea.classList.remove('hidden');
+            loadingSpinner.classList.remove('hidden');
+            successBox.classList.add('hidden');
+
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    loadingSpinner.classList.add('hidden');
+                    successBox.classList.remove('hidden');
+                    downloadLink.href = data.download_url;
+                } else {
+                    alert('အမှားအယွင်းရှိပါသည်: ' + data.error);
+                    resultArea.classList.add('hidden');
+                }
+            } catch (err) {
+                alert(' ဆာဗာသို့ ချိတ်ဆက်၍ မရပါ။');
+                resultArea.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
